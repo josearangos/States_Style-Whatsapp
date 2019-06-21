@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity implements StoriesProgressVi
 
     private  String[][] resources_Phrases ={
             {"Aristóteles","El fin de la ciencia especulativa es la verdad, y el fin de la ciencia práctica es la acción.","#00574B","#FFFFFF","","20sp","40sp"},
-            {"Pedro","Frase 2.","#00574B","#FFFFFF","","20sp","40sp"},
-            {"Juan","Frase 3","#00574B","#FFFFFF","","20sp","40sp"},
-            {"Sneider","Frase 4","#00574B","#FFFFFF","","20sp","40sp"},
-            {"Stiven","Frase 5","#00574B","#FFFFFF","","20sp","40sp"}
+            {"Marie Curie (1867 – 1934)","“Nada en la vida es para ser temido, es sólo para ser comprendido. Ahora es el momento de entender más, de modo que podamos temer menos”","#00574B","#FFFFFF","","20sp","40sp"},
+            {"Georg Lichtenberg (1742 – 1799)","“Es extraño que sólo las personas extraordinarios hagan descubrimientos que luego aparecen de manera fácil y sencilla”","#00574B","#FFFFFF","","20sp","40sp"},
+            {"Galileo Galilei (1564 – 1642)","“No se puede enseñar nada a un hombre, sólo se le puede ayudar a descubrirse a sí mismo”","#00574B","#FFFFFF","","20sp","40sp"},
+            {"John Archibald Wheeler (1911 – 2008)","“No existe una ley excepto la ley de que no hay ley”\n","#00574B","#FFFFFF","","20sp","40sp"}
 
     };
 
