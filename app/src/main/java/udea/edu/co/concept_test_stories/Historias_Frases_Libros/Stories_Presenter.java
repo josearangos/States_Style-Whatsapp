@@ -28,7 +28,7 @@ public class Stories_Presenter implements IStories_Phrases.IPresenter, IStories_
     }
 
     @Override
-    public void onSuccess(List<Story> stories) {
+    public void onSuccess(ArrayList<Story> stories) {
         view.displayLoader(false);
         view.getStories(stories);
     }

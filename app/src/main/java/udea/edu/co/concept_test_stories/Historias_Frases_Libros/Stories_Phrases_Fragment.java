@@ -76,9 +76,9 @@ public class Stories_Phrases_Fragment extends Fragment implements IStories_Phras
     }
 
     @Override
-    public void getStories(List<Story> stories) {
+    public void getStories(ArrayList<Story> stories) {
 
-        StoryAdapter storyAdapter = new StoryAdapter(stories);
+        StoryAdapter storyAdapter = new StoryAdapter(stories,getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         this.recyclerStories.setLayoutManager(linearLayoutManager);
         this.recyclerStories.setAdapter(storyAdapter);

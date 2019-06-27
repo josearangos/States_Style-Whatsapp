@@ -11,7 +11,7 @@ public interface IStories_Phrases {
     interface IView {
         void displayLoader(boolean loader);
         void initializeViews(View view);
-        void getStories(List<Story> stories);
+        void getStories(ArrayList<Story> stories);
         void displayError(String error);
     }
 
@@ -25,7 +25,7 @@ public interface IStories_Phrases {
     }
 
     interface CompleteListener {
-        void onSuccess(List<Story> stories);
+        void onSuccess(ArrayList<Story> stories);
         void onError(String error);
     }
 

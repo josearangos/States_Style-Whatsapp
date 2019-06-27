@@ -9,6 +9,6 @@ import udea.edu.co.concept_test_stories.Historias_Frases_Libros.Story;
 
 public interface IStoryAPI {
     @GET("Stories_Phrases.json")
-    Call<List<Story>> getStories();
+    Call<ArrayList<Story>> getStories();
 
 }

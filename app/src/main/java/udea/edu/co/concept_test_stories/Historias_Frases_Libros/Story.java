@@ -1,9 +1,14 @@
 package udea.edu.co.concept_test_stories.Historias_Frases_Libros;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Story {
+import java.io.Serializable;
+
+public class Story implements Serializable {
 
     @SerializedName("Author")
     @Expose
@@ -83,4 +88,31 @@ public class Story {
         this.sizeFontPhrase = sizeFontPhrase;
     }
 
+
+    public Story(String author, String phrase, String backgroundColor, String textColor, int duration, String sizeFontAuthor, String sizeFontPhrase) {
+        this.author = author;
+        this.phrase = phrase;
+        this.backgroundColor = backgroundColor;
+        this.textColor = textColor;
+        this.duration = duration;
+        this.sizeFontAuthor = sizeFontAuthor;
+        this.sizeFontPhrase = sizeFontPhrase;
+    }
+
+   /* @Override
+    public int describeContents() {
+        return this.hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(duration);
+        parcel.writeString(author);
+        parcel.writeString(phrase);
+        parcel.writeString(backgroundColor);
+        parcel.writeString(textColor);
+        parcel.writeString(sizeFontAuthor);
+        parcel.writeString(sizeFontPhrase);
+
+    }*/
 }

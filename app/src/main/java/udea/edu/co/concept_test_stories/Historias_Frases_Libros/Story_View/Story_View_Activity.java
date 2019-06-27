@@ -3,6 +3,7 @@ package udea.edu.co.concept_test_stories.Historias_Frases_Libros.Story_View;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import jp.shts.android.storiesprogressview.StoriesProgressView;
@@ -21,12 +23,11 @@ import udea.edu.co.concept_test_stories.R;
 public class Story_View_Activity extends AppCompatActivity  implements StoriesProgressView.StoriesListener {
 
 
-    private List<Story> storyList = new ArrayList<>();
+    private ArrayList<Story> storyList = new ArrayList<Story>();
     private int POSITION_INITAL =0;
     private StoriesProgressView storiesProgressView;
     private TextView author,phrase;
     private LinearLayout content_phrase;
-    int n=4, m=7;
     long pressTime = 0L;
     long limit = 500L;
     private int counter = 0;
@@ -48,23 +49,33 @@ public class Story_View_Activity extends AppCompatActivity  implements StoriesPr
         this.POSITION_INITAL = POSITION_INITAL;
     }
 
-    public List<Story> getStoryList() {
+    public ArrayList<Story> getStoryList() {
         return storyList;
     }
 
-    public void setStoryList(List<Story> storyList) {
+    public void setStoryList(ArrayList<Story> storyList) {
         this.storyList = storyList;
     }
 
-    private   int PROGRESS_COUNT = getStoryList().size();
+    private   int PROGRESS_COUNT =0;
+
+    public int getPROGRESS_COUNT() {
+        return PROGRESS_COUNT;
+    }
+
+    public void setPROGRESS_COUNT(int PROGRESS_COUNT) {
+        this.PROGRESS_COUNT = PROGRESS_COUNT;
+    }
 
 
     private final long[] durations = new long[]{
             500L, 1000L, 1500L, 4000L, 5000L, 1000,
     };
 
+    public Story_View_Activity() {
+    }
 
-    public Story_View_Activity(List<Story> storyList, int POSITION_INITAL) {
+    public Story_View_Activity(ArrayList<Story> storyList, int POSITION_INITAL) {
         this.storyList = storyList;
         this.POSITION_INITAL = POSITION_INITAL;
     }
@@ -89,32 +100,34 @@ public class Story_View_Activity extends AppCompatActivity  implements StoriesPr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_story_view);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_story_view);
+        Bundle bundle = getIntent().getExtras();
+        setStoryList((ArrayList<Story>)bundle.getSerializable("Stories"));
+        setPOSITION_INITAL(bundle.getInt("POSITION"));
+        System.out.println("Position "+ String.valueOf(getPOSITION_INITAL()));
+        System.out.println("Story "+ getStoryList().get(0).getAuthor());
 
+        setPROGRESS_COUNT(getStoryList().size());
         storiesProgressView = (StoriesProgressView) findViewById(R.id.stories);
-        storiesProgressView.setStoriesCount(PROGRESS_COUNT);
+        storiesProgressView.setStoriesCount(getPROGRESS_COUNT());
+
 
         storiesProgressView.setStoryDuration(3000);
-
         // or
         // storiesProgressView.setStoriesCountWithDurations(durations);
         storiesProgressView.setStoriesListener(this);
-        // storiesProgressView.startStories();
-        counter = getPOSITION_INITAL();
-        storiesProgressView.startStories(counter);
+        counter =  getPOSITION_INITAL();
 
+        storiesProgressView.startStories(counter);
         author =(TextView)findViewById(R.id.author);
         content_phrase= (LinearLayout)findViewById(R.id.content_phrase);
         phrase=(TextView)findViewById(R.id.phrase);
-
         content_phrase.setOnTouchListener(onTouchListener);
         author.setText(getStoryList().get(counter).getAuthor());
         phrase.setText(getStoryList().get(counter).getPhrase());
 
-
-      // bind reverse view
+        // bind reverse view
         View reverse = findViewById(R.id.reverse);
         reverse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +146,7 @@ public class Story_View_Activity extends AppCompatActivity  implements StoriesPr
             }
         });
         skip.setOnTouchListener(onTouchListener);
+
 
     }
     @Override
@@ -157,4 +171,7 @@ public class Story_View_Activity extends AppCompatActivity  implements StoriesPr
         storiesProgressView.destroy();
         super.onDestroy();
     }
+
+
+
 }

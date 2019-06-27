@@ -1,34 +1,45 @@
 package udea.edu.co.concept_test_stories.Historias_Frases_Libros.Adapters;
 
-import android.support.annotation.NonNull;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import udea.edu.co.concept_test_stories.Historias_Frases_Libros.Story;
+import udea.edu.co.concept_test_stories.Historias_Frases_Libros.Story_View.Story_View_Activity;
 import udea.edu.co.concept_test_stories.R;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder> {
 
-    private List<Story> storyList= new ArrayList<>();
+    private ArrayList<Story> storyList= new ArrayList<Story>();
     private int mItemSelected=-1;
+    private Context mContext;
 
-    public StoryAdapter(List<Story> storyList) {
-        setStoryList(storyList);
-        System.out.println("SIZE"+String.valueOf(getStoryList().size()));
+
+    public StoryAdapter(ArrayList<Story> storyList, Context mContext) {
+        this.storyList = storyList;
+        this.mContext = mContext;
     }
 
-    public List<Story> getStoryList() {
+    public Context getmContext() {
+        return mContext;
+    }
+
+    public void setmContext(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public ArrayList<Story> getStoryList() {
         return storyList;
     }
 
-    public void setStoryList(List<Story> storyList) {
+    public void setStoryList(ArrayList<Story> storyList) {
         this.storyList = storyList;
     }
 
@@ -62,6 +73,13 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.MyViewHolder
                 public void onClick(View view) {
                     System.out.println("Me tocann!!!!!!!!");
                     //Open Story View Activity with position
+
+                   Intent intent = new Intent(getmContext(),Story_View_Activity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Stories",getStoryList());
+                    bundle.putInt("POSITION",7);
+                    intent.putExtras(bundle);
+                    getmContext().startActivity(intent);
 
                 }
             });
